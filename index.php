@@ -7,6 +7,8 @@ error_reporting(E_ALL);
 //require autoload
 require_once('vendor/autoload.php');
 
+session_start();
+
 //create and instance of the Base class
 $f3 = Base::instance();
 //turn on fat free error reporting
@@ -50,6 +52,28 @@ $f3->route('GET /@pet', function ($f3, $params)
         default:
             $f3->error(404);
     }
+});
+
+$f3->route('GET /order', function(){
+    $view = new View;
+    echo $view->render('views/form1.html');
+});
+$f3->route('POST /order2', function(){
+    //print_r($_POST);
+    $_SESSION["animal"] = $_POST[animal];
+    //print_r($_SESSION);
+
+    $view = new View;
+    echo $view->render('views/form2.html');
+});
+
+$f3->route('POST /results', function(){
+    //print_r($_POST);
+    $_SESSION["color"] = $_POST[color];
+    //print_r($_SESSION);
+
+    $template = new Template();
+    echo $template->render('views/results.html');
 });
 
 //run fat free
