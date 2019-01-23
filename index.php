@@ -74,6 +74,8 @@ $f3->route('POST /results', function(){
 
     $template = new Template();
     echo $template->render('views/results.html');
+    echo "Thank you for ordering a " .
+        $_SESSION["color"] . " " . $_SESSION["animal"] . "!";
 });
 
 //run fat free
